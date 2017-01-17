@@ -8,7 +8,24 @@ The solver works very well on any 9x9 puzzle but the main purpose of this repo i
 
 ## World's hardest Sudoku
 
-<code>python2 sudoku.py</code>
+```python
+import sudoku
+
+sudoku_string = (
+    '8........'
+    '..36.....'
+    '.7..9.2..'
+    '.5...7...'
+    '....457..'
+    '...1...3.'
+    '..1....68'
+    '..85...1.'
+    '.9....4..'
+)
+sudoku = Sudoku(sudoku_string)
+sudoku.solve()
+print sudoku
+```
 
 ```
 8 1 2 | 7 5 3 | 6 4 9
