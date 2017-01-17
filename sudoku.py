@@ -35,9 +35,10 @@ class Sudoku(object):
         self.board = self.solver(self.board)
 
     @property
-    def is_solved(self, board=None):
-        if not board:
-            board = self.board
+    def solved(self):
+        return self.is_solved(self.board)
+
+    def is_solved(self, board):
         for cell in board:
             if len(cell) != 1:
                 return False
@@ -99,8 +100,13 @@ class Sudoku(object):
         ]
         return invalid
 
+    def get_string(self, sep=''):
+        if not self.solved:
+            return '<Unsolved sudoku'
+        return sep.join([str(cell[0]) for cell in self.board])
+
     def __str__(self):
-        if not self.is_solved:
+        if not self.solved:
             return '<Unsolved sudoku>'
         string = ''
         for i, cell in enumerate(self.board):
@@ -143,3 +149,4 @@ if __name__ == '__main__':
     sudoku = Sudoku(sudoku_string)
     sudoku.solve()
     print sudoku
+    print sudoku.get_string(',')
