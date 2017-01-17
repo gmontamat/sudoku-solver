@@ -40,3 +40,23 @@ print hard_sudoku
 4 3 8 | 5 2 6 | 9 1 7
 7 9 6 | 3 1 8 | 4 5 2
 ```
+
+## Unit testing
+
+```
+python2 test_sudoku.py
+```
+
+```
+Speed test
+----------
+Easy runtime: 0.286250829697
+Medium runtime: 0.0661108493805
+Hard runtime: 9.63975000381
+
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.035s
+
+OK
+```
