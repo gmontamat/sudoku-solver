@@ -22,9 +22,9 @@ sudoku_string = (
     '..85...1.'
     '.9....4..'
 )
-sudoku = Sudoku(sudoku_string)
-sudoku.solve()
-print sudoku
+hard_sudoku = sudoku.Sudoku(sudoku_string)
+hard_sudoku.solve()
+print hard_sudoku
 ```
 
 ```
