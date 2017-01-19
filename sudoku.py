@@ -102,17 +102,18 @@ class Sudoku(object):
 
     def get_string(self, sep=''):
         if not self.solved:
-            return '<Unsolved sudoku'
+            return '<Unsolved sudoku>'
         return sep.join([str(cell[0]) for cell in self.board])
 
     def __str__(self):
-        if not self.solved:
-            return '<Unsolved sudoku>'
         string = ''
         for i, cell in enumerate(self.board):
             if i / 9 in [3, 6] and i % 9 in [0]:
                 string += '------+-------+------\n'
-            string += str(cell[0])
+            if len(cell) > 1:
+                string += '?'
+            else:
+                string += str(cell[0])
             if i % 9 in [2, 5]:
                 string += ' | '
             elif i % 9 in [8]:
@@ -147,6 +148,7 @@ if __name__ == '__main__':
         '.9....4..'
     )
     sudoku = Sudoku(sudoku_string)
+    print sudoku
     sudoku.solve()
     print sudoku
     print sudoku.get_string(',')
