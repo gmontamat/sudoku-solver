@@ -8,6 +8,8 @@ The solver works very well on any 9x9 puzzle but the main purpose of this repo i
 
 ## World's hardest Sudoku
 
+The following puzzle was obtained (here)[http://www.telegraph.co.uk/news/science/science-news/9359579/Worlds-hardest-sudoku-can-you-crack-it.html]. It takes slightly less than 10 seconds to solve.
+
 ```python
 import sudoku
 
