@@ -10,21 +10,21 @@ class SudokuError(Exception):
 
 
 class Sudoku(object):
-
     def __init__(self, sudoku_string):
-        self.check_string(sudoku_string)
-        self.board = self.create_board(sudoku_string)
+        self.sudoku_string = sudoku_string
+        self.check_string()
+        self.board = self.create_board()
 
-    def check_string(self, sudoku_string):
-        if len(sudoku_string) != 81:
-            raise SudokuError('Incorrect board length')
-        for c in sudoku_string:
+    def check_string(self):
+        if len(self.sudoku_string) != 81:
+            raise SudokuError("Incorrect board length")
+        for c in self.sudoku_string:
             if not c.isdigit() and c != '.':
-                raise SudokuError('Unrecognized character')
+                raise SudokuError("Unrecognized character")
 
-    def create_board(self, sudoku_string):
+    def create_board(self):
         board = ()
-        for c in sudoku_string:
+        for c in self.sudoku_string:
             if c == '.':
                 board += (tuple(range(1, 10)),)
             else:
@@ -60,11 +60,13 @@ class Sudoku(object):
                         new_board[i] = new_cell
                         board = tuple(new_board)
                 else:
-                    raise SudokuError('Impossible to solve')
+                    raise SudokuError("Impossible to solve")
         if not self.is_solved(board):
+            min_index = None
+            min_cell = ()
             min_unknowns = 10
             for i, cell in enumerate(board):
-                if len(cell) < min_unknowns and len(cell) > 1:
+                if 1 < len(cell) < min_unknowns:
                     min_index = i
                     min_cell = cell
                     min_unknowns = len(cell)
@@ -78,31 +80,31 @@ class Sudoku(object):
                     pass
         else:
             return board
-        raise SudokuError('Impossible to solve')
+        raise SudokuError("Impossible to solve")
 
     def invalid_numbers(self, i, board):
         row = i / 9
         col = i % 9
         # Cells in the same row
-        check = [j for j in xrange(row*9, row*9+9) if j != i]
+        check = [j for j in xrange(row * 9, row * 9 + 9) if j != i]
         # Cells in the same column
         check += [j for j in xrange(col, 81, 9) if j != i]
         # Cells in the same square
         check += [
-            9*p+q for p in xrange(row/3*3, row/3*3+3)
-            for q in xrange(col/3*3, col/3*3+3)
-            if 9*p+q != i and p != row and q != col
-        ]
+            9 * p + q for p in xrange(row / 3 * 3, row / 3 * 3 + 3)
+            for q in xrange(col / 3 * 3, col / 3 * 3 + 3)
+            if 9 * p + q != i and p != row and q != col
+            ]
         # Return invalid values
         invalid = [
             cell[0] for i, cell in enumerate(board)
             if len(cell) == 1 and i in check
-        ]
+            ]
         return invalid
 
     def get_string(self, sep=''):
         if not self.solved:
-            return '<Unsolved sudoku>'
+            return "<Unsolved sudoku>"
         return sep.join([str(cell[0]) for cell in self.board])
 
     def __str__(self):

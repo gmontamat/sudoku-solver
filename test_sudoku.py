@@ -8,7 +8,6 @@ import sudoku
 import timeit
 import unittest
 
-
 # Some unsolved sudokus
 SUDOKU_HTS1 = (
     '9,3,6,,,8,7,1,4,1,4,7,6,,,,2,5,,,,7,4,,,,6,6'
@@ -38,7 +37,6 @@ SUDOKU_HARD = (
 
 
 class TestSudoku(unittest.TestCase):
-
     def test_convert_format(self):
         self.assertEqual(
             sudoku.convert_format(SUDOKU_HTS1),
@@ -82,10 +80,10 @@ def time_solver(sudoku_string):
 
 
 if __name__ == '__main__':
-    print 'Speed test'
-    print '----------'
-    print 'Easy runtime: {}'.format(time_solver(SUDOKU_EASY))
-    print 'Medium runtime: {}'.format(time_solver(SUDOKU_MEDIUM))
-    print 'Hard runtime: {}'.format(time_solver(SUDOKU_HARD))
+    print "Speed test"
+    print "----------"
+    print "Easy runtime: {}".format(time_solver(SUDOKU_EASY))
+    print "Medium runtime: {}".format(time_solver(SUDOKU_MEDIUM))
+    print "Hard runtime: {}".format(time_solver(SUDOKU_HARD))
     print
     unittest.main()
